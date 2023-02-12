@@ -1,8 +1,31 @@
-class Grass {
+class Creature{
     constructor(x, y, index) {
         this.x = x;
         this.y = y;
         this.index = index;
+    }
+    chooseCell(character) {
+        this.getNewCoordinates();
+        let found = [];
+        for (let i in this.directions) {
+            let x = this.directions[i][0];
+            let y = this.directions[i][1];
+            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
+                if (matrix[y][x] == character) {
+                    found.push(this.directions[i]);
+                }
+            }
+
+        }
+        return found;
+    }
+}
+
+
+
+class Grass extends Creature{
+    constructor(x, y, index) {
+        super(x,y,index)
         this.multiply = 0;
         this.directions = [
             [this.x - 1, this.y - 1],
@@ -14,7 +37,6 @@ class Grass {
             [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
-
     }
     chooseCell(character) {
         let found = [];
@@ -29,9 +51,7 @@ class Grass {
 
         }
         return found;
-
     }
-
     mul() {
         this.multiply++;
         let emptyCells = this.chooseCell(0);
@@ -49,12 +69,10 @@ class Grass {
     }
 }
 
-class GrassEater {
+class GrassEater extends Creature{
     constructor(x, y, index) {
-        this.x = x;
-        this.y = y;
+        super(x,y,index)
         this.energy = 8;
-        this.index = index;
         this.directions = [];
     }
     getNewCoordinates() {
@@ -69,21 +87,7 @@ class GrassEater {
             [this.x + 1, this.y + 1]
         ];
     }
-    chooseCell(character) {
-        this.getNewCoordinates();
-        let found = [];
-        for (let i in this.directions) {
-            let x = this.directions[i][0];
-            let y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i]);
-                }
-            }
 
-        }
-        return found;
-    }
     mul() {
         let emptyCells = this.chooseCell(1);
         let newCell = random(emptyCells);
@@ -146,12 +150,10 @@ class GrassEater {
     }
 }
 
-class Predator {
+class Predator extends Creature{
     constructor(x, y, index) {
-        this.x = x;
-        this.y = y;
+        super(x,y,index)
         this.energy = 18;
-        this.index = index;
         this.directions = [];
     }
     getNewCoordinates() {
@@ -165,21 +167,6 @@ class Predator {
             [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
-    }
-    chooseCell(character) {
-        this.getNewCoordinates();
-        let found = [];
-        for (let i in this.directions) {
-            let x = this.directions[i][0];
-            let y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i]);
-                }
-            }
-
-        }
-        return found;
     }
     mul() {
         let emptyCells = this.chooseCell(0);
@@ -256,12 +243,10 @@ class Predator {
     }
 }
 
-class Eagle {
+class Eagle extends Creature{
     constructor(x, y, index) {
-        this.x = x;
-        this.y = y;
+        super(x,y,index)
         this.energy = 20;
-        this.index = index;
         this.directions = [];
     }
     getNewCoordinates() {
@@ -275,21 +260,6 @@ class Eagle {
             [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
-    }
-    chooseCell(character) {
-        this.getNewCoordinates();
-        let found = [];
-        for (let i in this.directions) {
-            let x = this.directions[i][0];
-            let y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i]);
-                }
-            }
-
-        }
-        return found;
     }
     mul() {
         let emptyCells = this.chooseCell(0);
@@ -368,12 +338,10 @@ class Eagle {
     }
 }
 
-class Lion {
+class Lion extends Creature{
     constructor(x, y, index) {
-        this.x = x;
-        this.y = y;
+        super(x,y,index)
         this.energy = 12;
-        this.index = index;
         this.directions = [];
     }
     getNewCoordinates() {
@@ -387,21 +355,6 @@ class Lion {
             [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
-    }
-    chooseCell(character) {
-        this.getNewCoordinates();
-        let found = [];
-        for (let i in this.directions) {
-            let x = this.directions[i][0];
-            let y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i]);
-                }
-            }
-
-        }
-        return found;
     }
     mul() {
         let emptyCells = this.chooseCell(0);
