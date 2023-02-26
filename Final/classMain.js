@@ -1,8 +1,12 @@
 class Creature{
-    constructor(x, y, index) {
+    constructor(x, y, index, gender) {
         this.x = x;
         this.y = y;
         this.index = index;
+        this.gender = this.generateGender();
+    }
+    generateGender() {
+
     }
     getNewCoordinates() {
         this.directions = [
@@ -64,8 +68,6 @@ class Creature{
     }
 }
 
-
-
 class Grass extends Creature{
     constructor(x, y, index) {
         super(x,y,index)
@@ -100,7 +102,7 @@ class Grass extends Creature{
         let emptyCells = this.chooseCell(0);
         let newCell = random(emptyCells);
 
-        if (newCell && this.multiply >= 5) {
+        if (newCell && this.multiply >= 4) {
             let newX = newCell[0];
             let newY = newCell[1];
             matrix[newY][newX] = 1;
@@ -111,7 +113,6 @@ class Grass extends Creature{
         }
     }
 }
-
 class GrassEater extends Creature{
     constructor(x, y, index) {
         super(x,y,index)
@@ -122,14 +123,14 @@ class GrassEater extends Creature{
         let emptyCells = this.chooseCell(1);
         let newCell = random(emptyCells);
 
-        if (newCell && this.energy >= 12) {
+        if (newCell && this.energy >= 16) {
             let newX = newCell[0];
             let newY = newCell[1];
             matrix[newY][newX] = 1;
 
             let newGrassEater = new GrassEater(newX, newY, 1);
             grassEaterArr.push(newGrassEater);
-            this.energy--;
+            this.energy-=2;
         }
     }
     move() {
@@ -163,18 +164,17 @@ class GrassEater extends Creature{
                 }
             }
             this.energy++;
-            this.mul();
+            setTimeout(this.mul(),2)
         }
         else {
             this.move();
         }
     }
 }
-
 class Predator extends Creature{
     constructor(x, y, index) {
         super(x,y,index)
-        this.energy = 18;
+        this.energy = 10;
         this.directions = [];
     }
 
@@ -182,15 +182,16 @@ class Predator extends Creature{
         let emptyCells = this.chooseCell(0);
         let newCell = random(emptyCells);
 
-        if (newCell && this.energy >= 25) {
+        if (newCell && this.energy >= 16) {
             let newX = newCell[0];
             let newY = newCell[1];
             matrix[newY][newX] = 1;
 
             let newPredator = new Predator(newX, newY, 2);
             PredatorArr.push(newPredator);
-            this.energy--;
-        }else if(this.energy = 0){
+            this.energy==8;
+        }
+        else if(this.energy = 0){
             this.die(PredatorArr)
         }
     }
@@ -210,31 +211,18 @@ class Predator extends Creature{
                 }
             }
             this.energy += 2;
-            this.mul();
+            setTimeout(this.mul(),2)
         }
         else {
             this.move(3);
         }
     }
 }
-
 class Eagle extends Creature{
     constructor(x, y, index) {
         super(x,y,index)
         this.energy = 20;
         this.directions = [];
-    }
-    getNewCoordinates() {
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
     }
     mul() {
         let emptyCells = this.chooseCell(0);
@@ -290,24 +278,11 @@ class Eagle extends Creature{
         }
     }
 }
-
 class Lion extends Creature{
     constructor(x, y, index) {
         super(x,y,index)
         this.energy = 12;
         this.directions = [];
-    }
-    getNewCoordinates() {
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
     }
     mul() {
         let emptyCells = this.chooseCell(0);
@@ -347,24 +322,11 @@ class Lion extends Creature{
         }
     }
 }
-
-class Lap extends Creature{
+class Human extends Creature{
     constructor(x, y, index) {
         super(x,y,index)
         this.energy = 12;
         this.directions = [];
-    }
-    getNewCoordinates() {
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
     }
     mul() {
         let emptyCells = this.chooseCell(0);
@@ -375,8 +337,8 @@ class Lap extends Creature{
             let newY = newCell[1];
             matrix[newY][newX] = 1;
 
-            let newLap = new Lap(newX, newY, 4);
-            LapArr.push(newLap);
+            let newHuman = new Human(newX, newY, 4);
+            HumanArr.push(newHuman);
             this.energy = 12;
         }
     }
@@ -389,7 +351,7 @@ class Lap extends Creature{
             matrix[this.y][this.x] = 0;
             this.x = x;
             this.y = y;
-            matrix[this.y][this.x] = 6;
+            matrix[this.y][this.x] = 5;
             for (let i = 0; i < LionArr.length; i++) {
                 if (LionArr[i].x == x && LionArr[i].y == y) {
                     LionArr.splice(i, 1);
@@ -397,10 +359,81 @@ class Lap extends Creature{
                 }
             }
             this.energy += 2;
-            this.mul();
+            setTimeout(this.mul(),2)
         }
         else {
             this.move(6);
         }
+    }
+}
+class Pal extends Creature{
+    constructor(x, y, index) {
+        super(x,y,index)
+        this.energy = 12;
+        this.directions = [];
+    }
+    mul() {
+        let emptyCells = this.chooseCell(0);
+        let newCell = random(emptyCells);
+
+        if (newCell && this.energy >= 14) {
+            let newX = newCell[0];
+            let newY = newCell[1];
+            matrix[newY][newX] = 1;
+
+            let newPal = new Pal(newX, newY, 6);
+            PalArr.push(newPal);
+            this.energy = 12;
+        }
+    }
+
+    eat() {
+        let newCell = random(this.chooseCell(6));
+        if (newCell) {
+            let x = newCell[0];
+            let y = newCell[1];
+            matrix[this.y][this.x] = 0;
+            this.x = x;
+            this.y = y;
+            matrix[this.y][this.x] = 5;
+            for (let i = 0; i < HumanArr.length; i++) {
+                if (HumanArr[i].x == x && HumanArr[i].y == y) {
+                    HumanArr.splice(i, 1);
+                    break;
+                }
+            }
+            this.energy += 2;
+            setTimeout(this.mul(),2)
+        }
+        else {
+            this.move(7);
+        }
+    }
+}
+class Event {
+    constructor(y,x){
+        this.x = x;
+        this.y = y;
+        this.directions = [
+            [this.x - 1, this.y - 1],
+            [this.x, this.y - 1],
+            [this.x + 1, this.y - 1],
+            [this.x - 1, this.y],
+            [this.x + 1, this.y],
+            [this.x - 1, this.y + 1],
+            [this.x, this.y + 1],
+            [this.x + 1, this.y + 1],    
+        ];
+    }
+    radioactive(){
+        for (let l = 0; l < this.directions.length; l++) {
+
+                let dirx = this.directions[l][0]
+                let diry = this.directions[l][1]
+                if(dirx < matrix.length , diry < matrix[l].length){
+                    matrix[diry][dirx] = 9
+                }
+        }
+        console.log(this.x,this.y);
     }
 }
