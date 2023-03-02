@@ -7,9 +7,54 @@
     <title>Document</title>
 </head>
 <body>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .season{
+            font-size: 120px;
+            align-items: center;
+            background-color: #0A66C2;
+            border: 0;
+            padding: 0 50px 0 50px;
+            border-radius: 100px;
+            box-sizing: border-box;
+            color: #ffffff;
+            cursor: pointer;
+            font-weight: 600;
+            text-align: center;            
+        }
+
+        .season:hover,
+        .season:focus { 
+        background-color: #16437E;
+        color: #ffffff;
+        }
+        .text{
+            font-size: 100px;
+        }
+    </style>
+    <button class="season">Change Season</button>
+    <p class="text">Current Season: Summer</p>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
     <script src="script.js"></script>
     <script src="classMain.js"></script>
+    <script src="grass.js"></script>
+    <script src="grassEater.js"></script>
+    <script src="predator.js"></script>
+    <script src="eagle.js"></script>
+    <script src="lion.js"></script>
+    <script src="human.js"></script>
+    <script src="void.js"></script>
     <script src="event.js"></script>
 </body>
 </html>

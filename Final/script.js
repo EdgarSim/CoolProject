@@ -1,77 +1,5 @@
-let cnv
-function click() {
-    console.log(mouseX,mouseY);
-    let l = Math.round(mouseX / side);
-    let m = Math.round(mouseY / side);
-    if(matrix[m][l] == 1){
-    matrix[m][l] = 8;
-        for (let i = 0; i < grassArr.length; i++) {
-            if (grassArr[i].x == l && grassArr[i].y == m) {
-                grassArr.splice(i, 1);
-                break;
-            }
-        }
-    } else if(matrix[m][l] == 2){
-        matrix[m][l] = 8;
-        for (let i = 0; i < grassEaterArr.length; i++) {
-            if (grassEaterArr[i].x == l && grassEaterArr[i].y == m) {
-                grassEaterArr.splice(i, 1);
-                break;
-            }
-        }
-    }
-    else if(matrix[m][l] == 3){
-        matrix[m][l] = 8;
-        for (let i = 0; i < PredatorArr.length; i++) {
-            if (PredatorArr[i].x == l && PredatorArr[i].y == m) {
-                PredatorArr.splice(i, 1);
-                break;
-            }
-        }
-    }
-    else if(matrix[m][l] == 4){
-        matrix[m][l] = 8;
-        for (let i = 0; i < EagleArr.length; i++) {
-            if (EagleArr[i].x == l && EagleArr[i].y == m) {
-                EagleArr.splice(i, 1);
-                break;
-            }
-        }
-    }
-    else if(matrix[m][l] == 5){
-        matrix[m][l] = 8;
-        for (let i = 0; i < LionArr.length; i++) {
-            if (LionArr[i].x == l && LionArr[i].y == m) {
-                LionArr.splice(i, 1);
-                break;
-            }
-        }
-    }
-    else if(matrix[m][l] == 6){
-        matrix[m][l] = 8;
-        for (let i = 0; i < HumanArr.length; i++) {
-            if (HumanArr[i].x == l && HumanArr[i].y == m) {
-                HumanArr.splice(i, 1);
-                break;
-            }
-        }
-    }
-    else if(matrix[m][l] == 7){
-        matrix[m][l] = 8;
-        for (let i = 0; i < PalArr.length; i++) {
-            if (PalArr[i].x == l && PalArr[i].y == m) {
-                PalArr.splice(i, 1);
-                break;
-            }
-        }
-    }
-    else {
-        matrix[m][l] = 8;
-    }
-}
 
-
-
+//Matrix
 function matrixGenerator(height, width, one, two, three, four, five, six, seven) {
     let matrix = [];
     for (let i = 0; i < height; i++) {
@@ -80,61 +8,69 @@ function matrixGenerator(height, width, one, two, three, four, five, six, seven)
             matrix[i].push(0);
         }
     }
-    for (let i = 0; i < one; i++) {
-        let x = Math.floor(Math.random() * (width - 1));
-        let y = Math.floor(Math.random() * (height - 1));
-            matrix[y][x] = 1;
-    }
-    for (let i = 0; i < two; i++) {
-        let x = Math.floor(Math.random() * (width - 1));
-        let y = Math.floor(Math.random() * (height - 1));
-            matrix[y][x] = 2;
-    }
-    for (let i = 0; i < three; i++) {
-        let x = Math.floor(Math.random() * (width - 1));
-        let y = Math.floor(Math.random() * (height - 1));
-            matrix[y][x] = 3;
-    }
-    for (let i = 0; i < four; i++) {
-        let x = Math.floor(Math.random() * (width - 1));
-        let y = Math.floor(Math.random() * (height - 1));
-            matrix[y][x] = 4;
-    }
-    for (let i = 0; i < five; i++) {
-        let x = Math.floor(Math.random() * (width - 1));
-        let y = Math.floor(Math.random() * (height - 1));
-        if(matrix[y][x] == 0){
-        matrix[y][x] = 5;
-        }
-    }
-    for (let i = 0; i < six; i++) {
-        let x = Math.floor(Math.random() * (width - 1));
-        let y = Math.floor(Math.random() * (height - 1));
-        if(matrix[y][x] == 0){
-        matrix[y][x] = 6;
-        }
-    }
-    for (let i = 0; i < seven; i++) {
-        let x = Math.floor(Math.random() * (width - 1));
-        let y = Math.floor(Math.random() * (height - 1));
-        if(matrix[y][x] == 0){
-        matrix[y][x] = 7;
-        }
-    }
-    return matrix;
-}
-let matrix = matrixGenerator(20,20 );
-console.log(matrix);
+        for (let i = 0; i <= one; i++) {
+            let x = Math.floor(Math.random() * width);
+            let y = Math.floor(Math.random() * height);
 
+                matrix[y][x] = 1;
+
+        }
+        for (let i = 0; i <= two; i++) {
+            let x = Math.floor(Math.random() * width);
+            let y = Math.floor(Math.random() * height);
+
+                matrix[y][x] = 2;
+
+        }
+        for (let i = 0; i <= three; i++) {
+            let x = Math.floor(Math.random() * width);
+            let y = Math.floor(Math.random() * height);
+
+                matrix[y][x] = 3;
+
+        }
+        for (let i = 0; i <= four; i++) {
+            let x = Math.floor(Math.random() * width);
+            let y = Math.floor(Math.random() * height);
+            if(matrix[y][x] == 0){
+                matrix[y][x] = 4;
+            }
+        }
+        for (let i = 0; i <= five; i++) {
+            let x = Math.floor(Math.random() * width);
+            let y = Math.floor(Math.random() * height);
+            if(matrix[y][x] == 0){
+            matrix[y][x] = 5;
+            }
+        }
+        for (let i = 0; i <= six; i++) {
+            let x = Math.floor(Math.random() * width);
+            let y = Math.floor(Math.random() * height);
+            if(matrix[y][x] == 0){
+            matrix[y][x] = 6;
+            }
+        }
+        for (let i = 0; i <= seven; i++) {
+            let x = Math.floor(Math.random() * width);
+            let y = Math.floor(Math.random() * height);
+            if(matrix[y][x] == 0){
+            matrix[y][x] = 7;
+            }
+        }
+        return matrix;
+}
+let matrix = matrixGenerator(50,50,1500,200,200,100,100,50,50);
+console.log(matrix);
+//Arrays
 var grassArr = [];
 var grassEaterArr = [];
 var PredatorArr = [];
 var EagleArr = [];
 var LionArr = [];
 var HumanArr = [];
-var PalArr = [];
+var VoidArr = [];
 var EventArr = [];
-
+let cnv;
 var side = 45;
 
 function setup() {
@@ -168,20 +104,54 @@ function setup() {
                 HumanArr.push(human)
             }
             else if(matrix[i][j] === 7) {
-                const pal = new Pal(j, i, 7);
-                PalArr.push(pal)
+                const void1 = new Void(j, i, 7);
+                VoidArr.push(void1)
             }
         }
     }
 }
+let color;
+    let n = 1;
+    let curSsn;
+    let txt = document.querySelector('.text')
+    let but = document.querySelector('.season');
+    but.onclick = season
+function season(){
+    let ssns = ['Summer','Fall','Winter','Spring']
+    curSsn = ssns[n]
+    if(n<=4){
+        n++;
+    }else{
+        n = 0;
+    }
+}
 
 function draw() {   
+    let color = '#9FC131';
+    let acid = '#C90000'
+    if(curSsn === 'Summer'){
+        txt.innerHTML = `Current Season:${curSsn}`
+        color = '#9FC131';
+        acid = '#C90000';
+    }else if(curSsn === 'Fall'){
+        txt.innerHTML = `Current Season:${curSsn}`
+        color = '#EA6B40';
+        acid = '#07BED8';
+    }else if(curSsn === 'Winter'){
+        txt.innerHTML = `Current Season:${curSsn}`
+        color = '#F7F1EA';
+        acid = '#00CD73';
+    }else if(curSsn === 'Spring'){
+        txt.innerHTML = `Current Season:${curSsn}`
+        color = '#83AB7F';
+        acid = '#C90000';
+    }
     cnv.mouseClicked(click)
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
 
             if (matrix[y][x] == 1) {
-                fill("green");
+                fill(color);
             }
             else if (matrix[y][x] == 2) {
                 fill("yellow");
@@ -190,7 +160,7 @@ function draw() {
                 fill("red");
             }
             else if (matrix[y][x] == 4  ) {
-                fill("brown");
+                fill("#595340");
             }
             else if (matrix[y][x] == 5  ) {
                 fill("orange");
@@ -199,16 +169,13 @@ function draw() {
                 fill("#EAD091");
             }
             else if (matrix[y][x] == 7) {
-                fill("blue");
+                fill("black");
             }
             else if (matrix[y][x] == 8) {
-                fill("black");
-                const event = new Event(y, x);
-                EventArr.push(event)
-                console.log(y,x);
+                fill(acid);
             }
             else if (matrix[y][x] == 9) {
-                fill("green");
+                fill(acid);
             }
 
             else if (matrix[y][x] == 0) {
@@ -219,7 +186,7 @@ function draw() {
 
         }
     }
-    console.log();
+
     for(var i in grassArr){
         grassArr[i].mul();
     }
@@ -238,10 +205,10 @@ function draw() {
     for(var i in HumanArr){
         HumanArr[i].eat();
     }
-    for(var i in PalArr){
-        PalArr[i].eat();
+    for(var i in VoidArr){
+        VoidArr[i].eat();
     }
     for(var i in EventArr){
-        EventArr[i].radioactive();
+        EventArr[i].acid();
     }
 }
