@@ -1,4 +1,3 @@
-
 //Matrix
 function matrixGenerator(height, width, one, two, three, four, five, six, seven) {
     let matrix = [];
@@ -8,58 +7,58 @@ function matrixGenerator(height, width, one, two, three, four, five, six, seven)
             matrix[i].push(0);
         }
     }
-        for (let i = 0; i <= one; i++) {
-            let x = Math.floor(Math.random() * width);
-            let y = Math.floor(Math.random() * height);
-
-                matrix[y][x] = 1;
-
+    for (let i = 0; i < one; i++) {
+        let x = Math.floor(Math.random() * width);
+        let y = Math.floor(Math.random() * height);
+        if(matrix[y][x] == 0){
+            matrix[y][x] = 1;
         }
-        for (let i = 0; i <= two; i++) {
-            let x = Math.floor(Math.random() * width);
-            let y = Math.floor(Math.random() * height);
-
-                matrix[y][x] = 2;
-
+    }
+    for (let i = 0; i < two; i++) {
+        let x = Math.floor(Math.random() * width);
+        let y = Math.floor(Math.random() * height);
+        
+        matrix[y][x] = 2;
+        
+    }
+    for (let i = 0; i < three; i++) {
+        let x = Math.floor(Math.random() * width);
+        let y = Math.floor(Math.random() * height);
+        
+        matrix[y][x] = 3;
+        
+    }
+    for (let i = 0; i < four; i++) {
+        let x = Math.floor(Math.random() * width);
+        let y = Math.floor(Math.random() * height);
+        if(matrix[y][x] == 0){
+            matrix[y][x] = 4;
         }
-        for (let i = 0; i <= three; i++) {
-            let x = Math.floor(Math.random() * width);
-            let y = Math.floor(Math.random() * height);
-
-                matrix[y][x] = 3;
-
-        }
-        for (let i = 0; i <= four; i++) {
-            let x = Math.floor(Math.random() * width);
-            let y = Math.floor(Math.random() * height);
-            if(matrix[y][x] == 0){
-                matrix[y][x] = 4;
-            }
-        }
-        for (let i = 0; i <= five; i++) {
-            let x = Math.floor(Math.random() * width);
-            let y = Math.floor(Math.random() * height);
-            if(matrix[y][x] == 0){
+    }
+    for (let i = 0; i < five; i++) {
+        let x = Math.floor(Math.random() * width);
+        let y = Math.floor(Math.random() * height);
+        if(matrix[y][x] == 0){
             matrix[y][x] = 5;
-            }
         }
-        for (let i = 0; i <= six; i++) {
-            let x = Math.floor(Math.random() * width);
-            let y = Math.floor(Math.random() * height);
-            if(matrix[y][x] == 0){
+    }
+    for (let i = 0; i < six; i++) {
+        let x = Math.floor(Math.random() * width);
+        let y = Math.floor(Math.random() * height);
+        if(matrix[y][x] == 0){
             matrix[y][x] = 6;
-            }
         }
-        for (let i = 0; i <= seven; i++) {
-            let x = Math.floor(Math.random() * width);
-            let y = Math.floor(Math.random() * height);
-            if(matrix[y][x] == 0){
+    }
+    for (let i = 0; i < seven; i++) {
+        let x = Math.floor(Math.random() * width);
+        let y = Math.floor(Math.random() * height);
+        if(matrix[y][x] == 0){
             matrix[y][x] = 7;
-            }
         }
-        return matrix;
+    }
+    return matrix;
 }
-let matrix = matrixGenerator(50,50,1500,200,200,100,100,50,50);
+let matrix = matrixGenerator(50,50,1500,200,100,100,100,100,100);
 console.log(matrix);
 //Arrays
 var grassArr = [];
@@ -72,9 +71,9 @@ var VoidArr = [];
 var EventArr = [];
 let cnv;
 var side = 45;
-
+let fr = 4;
 function setup() {
-    frameRate(12);
+
     cnv = createCanvas(matrix[0].length * side, matrix.length * side);
     background('#acacac');
     for (let i = 0; i < matrix.length; i++) {
@@ -112,39 +111,71 @@ function setup() {
 }
 let color;
     let n = 1;
-    let curSsn;
+    let curSsn = 'Summer';
     let txt = document.querySelector('.text')
     let but = document.querySelector('.season');
     but.onclick = season
 function season(){
     let ssns = ['Summer','Fall','Winter','Spring']
     curSsn = ssns[n]
-    if(n<=4){
+    if(n<3){
         n++;
     }else{
         n = 0;
     }
 }
+function summer(grass){
+    grass.mult = 2;
+    fr = 10;
+}
+function fall(grass){
+    grass.mult = 9;
+    fr = 4;
+}
 
-function draw() {   
+function draw() {  
+    if(frameCount%60 == 0){
+        var data = {
+
+            "grass":grassArr.length,
+            "grassEater":grassEaterArr.length,
+            "predator": PredatorArr.length,
+            "eagle":EagleArr.length,
+            "lion":LionArr.length,
+            "human":HumanArr.length,
+            "void":VoidArr.length
+        }
+        io().emit("send data",data)
+    }
     let color = '#9FC131';
     let acid = '#C90000'
     if(curSsn === 'Summer'){
         txt.innerHTML = `Current Season:${curSsn}`
         color = '#9FC131';
         acid = '#C90000';
+        grassArr.forEach(summer)
+        frameRate(fr);    
+
     }else if(curSsn === 'Fall'){
         txt.innerHTML = `Current Season:${curSsn}`
         color = '#EA6B40';
         acid = '#07BED8';
+        grassArr.forEach(fall)
+        frameRate(fr);    
+
     }else if(curSsn === 'Winter'){
         txt.innerHTML = `Current Season:${curSsn}`
         color = '#F7F1EA';
         acid = '#00CD73';
+        grassArr.forEach(fall)
+        frameRate(fr);    
+
     }else if(curSsn === 'Spring'){
         txt.innerHTML = `Current Season:${curSsn}`
         color = '#83AB7F';
         acid = '#C90000';
+        grassArr.forEach(summer)
+        frameRate(fr);    
     }
     cnv.mouseClicked(click)
     for (var y = 0; y < matrix.length; y++) {

@@ -1,22 +1,25 @@
 class Eagle extends Creature{
-    constructor(x, y, index) {
-        super(x,y,index)
+    constructor(x, y, index,gender) {
+        super(x,y,index,gender)
         this.energy = 10;
         this.directions = [];
     }
     mul() {
-        if(frameCount <= 180){
-            let emptyCells = this.chooseCell(0);
-            let newCell = random(emptyCells);
-    
-            if (newCell && this.energy >= 12) {
-                let newX = newCell[0];
-                let newY = newCell[1];
-                matrix[newY][newX] = 4;
-    
-                let newEagle = new Eagle(newX, newY, 4);
-                EagleArr.push(newEagle);
-                this.energy=8;
+        if(this.gender == 'f'){
+
+            if(frameCount <= 180){
+                let emptyCells = this.chooseCell(0);
+                let newCell = random(emptyCells);
+        
+                if (newCell && this.energy >= 12) {
+                    let newX = newCell[0];
+                    let newY = newCell[1];
+                    matrix[newY][newX] = 4;
+        
+                    let newEagle = new Eagle(newX, newY, 4);
+                    EagleArr.push(newEagle);
+                    this.energy=8;
+                }
             }
         }
     }

@@ -12,6 +12,7 @@ class Grass extends Creature{
             [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
+        this.mult = 5;
     }
     chooseCell(character) {
         let found = [];
@@ -28,18 +29,19 @@ class Grass extends Creature{
         return found;
     }
     mul() {
-        this.multiply++;
-        let emptyCells = this.chooseCell(0);
-        let newCell = random(emptyCells);
 
-        if (newCell && this.multiply >= 3) {
-            let newX = newCell[0];
-            let newY = newCell[1];
-            matrix[newY][newX] = 1;
-
-            let newGrass = new Grass(newX, newY, 1);
-            grassArr.push(newGrass);
-            this.multiply = 0;
-        }
+            this.multiply++;
+            let emptyCells = this.chooseCell(0);
+            let newCell = random(emptyCells);
+    
+            if (newCell && this.multiply >= this.mult) {
+                let newX = newCell[0];
+                let newY = newCell[1];
+                matrix[newY][newX] = 1;
+    
+                let newGrass = new Grass(newX, newY, 1);
+                grassArr.push(newGrass);
+                this.multiply = 0;
+            }
     }
 }

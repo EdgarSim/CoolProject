@@ -1,19 +1,21 @@
 class Creature{
-    constructor(x, y, index, gender) {
+    constructor(x, y, index) {
         this.x = x;
         this.y = y;
         this.index = index;
-        this.gender = gender;
+        this.gender = '';
     }
-    generateGender() {
-        let a = Math.random();
-        if(a < 0.4){
-            this.gender = 'm';
-        }else {
+    generateGender(){
+        let a = Math.random()
+        if(a < 0.6){
             this.gender = 'f';
+        }else{
+            this.gender = 'g';
         }
     }
+
     getNewCoordinates() {
+        this.generateGender();
         this.directions = [
             [this.x - 1, this.y - 1],
             [this.x, this.y - 1],

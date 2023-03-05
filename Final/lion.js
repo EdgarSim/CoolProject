@@ -1,10 +1,11 @@
 class Lion extends Creature{
-    constructor(x, y, index) {
-        super(x,y,index)
+    constructor(x, y, index,gender) {
+        super(x,y,index,gender)
         this.energy = 12;
         this.directions = [];
     }
     mul() {
+        if(this.gender == 'f'){
         if(frameCount <= 120){
             let emptyCells = this.chooseCell(0);
             let newCell = random(emptyCells);
@@ -19,6 +20,7 @@ class Lion extends Creature{
                 this.energy = 12;
             }
         }
+    }
     }
 
     eat() {

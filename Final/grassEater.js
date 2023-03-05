@@ -5,17 +5,19 @@ class GrassEater extends Creature{
         this.directions = [];
     }
     mul() {
-        let emptyCells = this.chooseCell(1);
-        let newCell = random(emptyCells);
-
-        if (newCell && this.energy >= 16) {
-            let newX = newCell[0];
-            let newY = newCell[1];
-            matrix[newY][newX] = 1;
-
-            let newGrassEater = new GrassEater(newX, newY, 2);
-            grassEaterArr.push(newGrassEater);
-            this.energy = 5;
+        if(frameCount <= 120){
+            let emptyCells = this.chooseCell(1);
+            let newCell = random(emptyCells);
+    
+            if (newCell && this.energy >= 13) {
+                let newX = newCell[0];
+                let newY = newCell[1];
+                matrix[newY][newX] = 1;
+    
+                let newGrassEater = new GrassEater(newX, newY, 2);
+                grassEaterArr.push(newGrassEater);
+                this.energy = 5;
+            }
         }
     }
     move() {
